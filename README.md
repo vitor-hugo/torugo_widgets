@@ -13,12 +13,6 @@ preventing shadows from bleeding through semi-transparent widget bodies.
 
 <img src="doc/showcase.png" alt="TContainer showcase" width="500"/>
 
-
-# Copyright <!-- omit in toc -->
-
-Copyright (c) 2026 Vitor Hugo de Oliveira. All rights reserved.
-
-
 # License <!-- omit in toc -->
 
 Licensed under the MIT License.  
