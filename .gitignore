@@ -32,3 +32,5 @@ migrate_working_dir/
 # Ignoring example app for now
 # TODO: Include example app on source control
 /example/
+# Widget Preview related
+.widget_preview/
