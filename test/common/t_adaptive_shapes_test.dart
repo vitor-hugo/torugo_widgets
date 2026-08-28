@@ -8,7 +8,7 @@ void main() {
     // MARK: Shape Border
     //
     group('shapeBorder', () {
-      test('Should return correct default values when no args are provided', () {
+      test('Should return default values where no arguments are provided', () {
         final shapeBorder = TAdaptiveShapes.shapeBorder();
 
         if (TPlatform.isApple) {
@@ -25,19 +25,26 @@ void main() {
         expect(border.side, equals(BorderSide.none));
       });
 
-      test('Should return correct shape when forcing it', () {
-        final superellipseBorder = TAdaptiveShapes.shapeBorder(shape: TBorderShape.superellipse);
-        final roundedRectBorder = TAdaptiveShapes.shapeBorder(shape: TBorderShape.roundedRect);
+      test('Should return the requested shape where a shape is forced', () {
+        final superellipseBorder = TAdaptiveShapes.shapeBorder(
+          shape: TBorderShape.superellipse,
+        );
+        final roundedRectBorder = TAdaptiveShapes.shapeBorder(
+          shape: TBorderShape.roundedRect,
+        );
 
         expect(superellipseBorder, isA<RoundedSuperellipseBorder>());
         expect(roundedRectBorder, isA<RoundedRectangleBorder>());
       });
 
-      test('Should return correct values when setting radius and side', () {
+      test('Should apply radius and side where they are provided', () {
         final radius = 10.0;
         final side = const BorderSide(color: Colors.red, width: 2.0);
 
-        final shapeBorder = TAdaptiveShapes.shapeBorder(radius: radius, side: side);
+        final shapeBorder = TAdaptiveShapes.shapeBorder(
+          radius: radius,
+          side: side,
+        );
         final border = TPlatform.isApple
             ? shapeBorder as RoundedSuperellipseBorder
             : shapeBorder as RoundedRectangleBorder;
@@ -45,6 +52,18 @@ void main() {
         expect(border.borderRadius, equals(BorderRadius.circular(radius)));
         expect(border.side, equals(side));
       });
+
+      test(
+        'Should clamp radius to zero where a negative radius is provided',
+        () {
+          final shapeBorder = TAdaptiveShapes.shapeBorder(radius: -10.0);
+          final border = TPlatform.isApple
+              ? shapeBorder as RoundedSuperellipseBorder
+              : shapeBorder as RoundedRectangleBorder;
+
+          expect(border.borderRadius, BorderRadius.zero);
+        },
+      );
     });
 
     //
@@ -52,7 +71,7 @@ void main() {
     //
     // `outlinedBorder()` is tested indirectly through shapeBorder.
     group('outlinedBorder', () {
-      test('Should return correct default values when no args are provided', () {
+      test('Should return default values where no arguments are provided', () {
         final outlinedBorder = TAdaptiveShapes.outlinedBorder();
         expect(outlinedBorder, isA<OutlinedBorder>());
 
@@ -63,13 +82,29 @@ void main() {
         expect(border.borderRadius, equals(BorderRadius.circular(0.0)));
         expect(border.side, equals(BorderSide.none));
       });
+
+      test('Should forward properties where a shape is forced', () {
+        const side = BorderSide(color: Colors.blue, width: 3.0);
+        final border = TAdaptiveShapes.outlinedBorder(
+          radius: 8.0,
+          side: side,
+          shape: TBorderShape.superellipse,
+        );
+
+        expect(border, isA<RoundedSuperellipseBorder>());
+        expect(
+          (border as RoundedSuperellipseBorder).borderRadius,
+          BorderRadius.circular(8.0),
+        );
+        expect(border.side, side);
+      });
     });
 
     //
     // MARK: Clip Shape
     //
     group('clipShape', () {
-      test('Should return correct default values when no args are provided', () {
+      test('Should return default values where no arguments are provided', () {
         final clipShape = TAdaptiveShapes.clipShape();
 
         if (TPlatform.isApple) {
@@ -84,19 +119,26 @@ void main() {
       });
     });
 
-    test('Should return correct shape when forcing it', () {
-      final superellipseClip = TAdaptiveShapes.clipShape(shape: TBorderShape.superellipse);
-      final roundedRectClip = TAdaptiveShapes.clipShape(shape: TBorderShape.roundedRect);
+    test('Should return the requested shape where a shape is forced', () {
+      final superellipseClip = TAdaptiveShapes.clipShape(
+        shape: TBorderShape.superellipse,
+      );
+      final roundedRectClip = TAdaptiveShapes.clipShape(
+        shape: TBorderShape.roundedRect,
+      );
 
       expect(superellipseClip, isA<ClipRSuperellipse>());
       expect(roundedRectClip, isA<ClipRRect>());
     });
 
-    test('Should return correct values when args are provided', () {
+    test('Should apply properties where they are provided', () {
       final radius = 10.0;
       final clipBehavior = Clip.hardEdge;
 
-      final clipShape = TAdaptiveShapes.clipShape(radius: radius, clipBehavior: clipBehavior);
+      final clipShape = TAdaptiveShapes.clipShape(
+        radius: radius,
+        clipBehavior: clipBehavior,
+      );
 
       if (TPlatform.isApple) {
         final clip = clipShape as ClipRSuperellipse;
@@ -107,6 +149,18 @@ void main() {
         expect(clip.borderRadius, equals(BorderRadius.circular(radius)));
         expect(clip.clipBehavior, equals(clipBehavior));
       }
+    });
+
+    test('Should forward the child where one is provided', () {
+      const child = SizedBox(key: Key('child'));
+      final clipShape = TAdaptiveShapes.clipShape(
+        radius: -10.0,
+        shape: TBorderShape.roundedRect,
+        child: child,
+      ) as ClipRRect;
+
+      expect(clipShape.borderRadius, BorderRadius.zero);
+      expect(clipShape.child, child);
     });
   });
 }
