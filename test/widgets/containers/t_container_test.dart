@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -131,12 +132,18 @@ void main() {
         const gradient = LinearGradient(colors: [Colors.red, Colors.blue]);
         const shadow = BoxShadow(
           color: Colors.black,
+          offset: Offset(2, 3),
           blurRadius: 4,
           spreadRadius: 2,
         );
+        final decorationImage = DecorationImage(
+          image: MemoryImage(
+            Uint8List.fromList([71,73,70,56,57,97,1,0,1,0,128,0,0,0,0,0,255,255,255,44,0,0,0,0,1,0,1,0,0,2,1,76,0,59]),
+          ),
+        );
 
         await tester.pumpWidget(
-          const MaterialApp(
+          MaterialApp(
             home: Scaffold(
               body: SizedBox(
                 width: 100,
@@ -144,8 +151,12 @@ void main() {
                 child: TContainer(
                   color: Colors.green,
                   gradient: gradient,
+                  decorationImage: decorationImage,
                   backgroundBlur: 3,
+                  blendMode: BlendMode.multiply,
                   shadows: [shadow],
+                  borderRadius: 10,
+                  borderShape: TBorderShape.superellipse,
                 ),
               ),
             ),
@@ -159,8 +170,7 @@ void main() {
           find.descendant(
             of: find.byType(TContainer),
             matching: find.byWidgetPredicate(
-              (widget) =>
-                  widget is DecoratedBox && widget.decoration is BoxDecoration,
+              (widget) => widget is DecoratedBox && widget.decoration is BoxDecoration,
             ),
           ),
         );
@@ -168,8 +178,7 @@ void main() {
           find.descendant(
             of: find.byType(TContainer),
             matching: find.byWidgetPredicate(
-              (widget) =>
-                  widget is CustomPaint && widget.painter is TShadowPainter,
+              (widget) => widget is CustomPaint && widget.painter is TShadowPainter,
             ),
           ),
         );
@@ -179,9 +188,38 @@ void main() {
         expect(filter.filter, isA<ImageFilter>());
         expect(decoration.color, Colors.green);
         expect(decoration.gradient, gradient);
+        expect(decoration.image, decorationImage);
+        expect(decoration.backgroundBlendMode, BlendMode.multiply);
         expect(painter.color, shadow.color);
+        expect(painter.offset, shadow.offset);
         expect(painter.blurRadius, shadow.blurRadius);
         expect(painter.spreadRadius, shadow.spreadRadius);
+        expect(painter.borderRadius, 10);
+        expect(painter.borderShape, TBorderShape.superellipse);
+      },
+    );
+
+    testWidgets(
+      'Should omit optional layers where blur and shadows are not provided',
+      (tester) async {
+        await tester.pumpWidget(
+          const MaterialApp(home: Scaffold(body: TContainer())),
+        );
+
+        final container = find.byType(TContainer);
+        expect(
+          find.descendant(of: container, matching: find.byType(BackdropFilter)),
+          findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: container,
+            matching: find.byWidgetPredicate(
+              (widget) => widget is CustomPaint && widget.painter is TShadowPainter,
+            ),
+          ),
+          findsNothing,
+        );
       },
     );
   });
