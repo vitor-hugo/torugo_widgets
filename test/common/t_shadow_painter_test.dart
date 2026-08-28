@@ -9,7 +9,7 @@ void main() {
     // MARK: Defaults
     //
     group('Constructor & Defaults', () {
-      test('Should have correct default values', () {
+      test('Should use default values where no arguments are provided', () {
         final painter = TShadowPainter();
 
         expect(painter.color, equals(Color(0x80000000)));
@@ -20,7 +20,7 @@ void main() {
         expect(painter.borderShape, equals(TBorderShape.adaptive));
       });
 
-      test('Should accept custom property values', () {
+      test('Should accept custom values where properties are provided', () {
         const color = Colors.green;
         const offset = Offset(10, 10);
         const blurRadius = 10.0;
@@ -42,75 +42,81 @@ void main() {
         expect(painter.borderShape, equals(borderShape));
       });
 
-      test('Should throw assertion error when blurRadius is negative', () {
+      test('Should throw an assertion error where blurRadius is negative', () {
         expect(
           () => TShadowPainter(blurRadius: -1.0),
           throwsA(isA<AssertionError>()),
         );
       });
 
-      test('Should throw assertion error when spreadRadius is negative', () {
-        expect(
-          () => TShadowPainter(spreadRadius: -1.0),
-          throwsA(isA<AssertionError>()),
-        );
-      });
+      test(
+        'Should throw an assertion error where spreadRadius is negative',
+        () {
+          expect(
+            () => TShadowPainter(spreadRadius: -1.0),
+            throwsA(isA<AssertionError>()),
+          );
+        },
+      );
 
-      test('Should throw assertion error when borderRadius is negative', () {
-        expect(
-          () => TShadowPainter(borderRadius: -1.0),
-          throwsA(isA<AssertionError>()),
-        );
-      });
+      test(
+        'Should throw an assertion error where borderRadius is negative',
+        () {
+          expect(
+            () => TShadowPainter(borderRadius: -1.0),
+            throwsA(isA<AssertionError>()),
+          );
+        },
+      );
     });
 
     //
     // MARK: Should Repaint
     //
     group('Should Repaint', () {
-      test('Should return false when properties are identical', () {
+      test('Should return false where properties are identical', () {
         final painter1 = TShadowPainter();
         final painter2 = TShadowPainter();
 
         expect(painter1.shouldRepaint(painter2), isFalse);
       });
 
-      test('Should return true when color changes', () {
+      test('Should return true where color changes', () {
         final painter1 = TShadowPainter(color: Colors.green);
         final painter2 = TShadowPainter(color: Colors.yellow);
 
         expect(painter1.shouldRepaint(painter2), isTrue);
       });
 
-      test('Should return true when offset changes', () {
+      test('Should return true where offset changes', () {
         final painter1 = TShadowPainter(offset: Offset(0, 0));
         final painter2 = TShadowPainter(offset: Offset(10, 10));
 
         expect(painter1.shouldRepaint(painter2), isTrue);
       });
 
-      test('Should return true when blurRadius changes', () {
+      test('Should return true where blurRadius changes', () {
         final painter1 = TShadowPainter(blurRadius: 5.0);
         final painter2 = TShadowPainter(blurRadius: 10.0);
 
         expect(painter1.shouldRepaint(painter2), isTrue);
       });
 
-      test('Should return true when spreadRadius changes', () {
+      test('Should return true where spreadRadius changes', () {
         final painter1 = TShadowPainter(spreadRadius: 5.0);
         final painter2 = TShadowPainter(spreadRadius: 10.0);
 
         expect(painter1.shouldRepaint(painter2), isTrue);
       });
 
-      test('Should return true when borderRadius changes', () {
+      test('Should return true where borderRadius changes', () {
         final painter1 = TShadowPainter(borderRadius: 5.0);
         final painter2 = TShadowPainter(borderRadius: 10.0);
 
         expect(painter1.shouldRepaint(painter2), isTrue);
       });
 
-      test('Should return true when borderShape changes', () {
+      test('Should return true where borderShape changes', () {
         final painter1 = TShadowPainter(borderShape: TBorderShape.roundedRect);
         final painter2 = TShadowPainter(borderShape: TBorderShape.superellipse);
 
@@ -122,7 +128,9 @@ void main() {
     // MARK: Integration
     //
     group('Paint Widget Integration', () {
-      testWidgets('Should render without error with default values', (WidgetTester tester) async {
+      testWidgets('Should render without error where default values are used', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -144,7 +152,9 @@ void main() {
         expect(find.byType(Container), findsOneWidget);
       });
 
-      testWidgets('Should render without error with custom values', (WidgetTester tester) async {
+      testWidgets('Should render without error where custom values are used', (
+        WidgetTester tester,
+      ) async {
         for (final shape in TBorderShape.values) {
           await tester.pumpWidget(
             MaterialApp(
