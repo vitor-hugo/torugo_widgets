@@ -19,23 +19,11 @@ final class TAdaptiveShapes {
     BorderSide side = .none,
     TBorderShape shape = TBorderShape.adaptive,
   }) {
-    final superellipse = RoundedSuperellipseBorder(
-      side: side,
-      borderRadius: BorderRadius.circular(radius.clamp(0.0, double.infinity)),
-    );
-    final roundedRect = RoundedRectangleBorder(
-      side: side,
-      borderRadius: BorderRadius.circular(radius.clamp(0.0, double.infinity)),
-    );
-
-    switch (shape) {
-      case .adaptive:
-        return TPlatform.isApple ? superellipse : roundedRect;
-      case .superellipse:
-        return superellipse;
-      case .roundedRect:
-        return roundedRect;
+    radius = radius.clamp(0.0, double.infinity);
+    if ((shape == .adaptive && TPlatform.isApple) || shape == .superellipse) {
+      return RoundedSuperellipseBorder(side: side, borderRadius: BorderRadius.circular(radius));
     }
+    return RoundedRectangleBorder(side: side, borderRadius: BorderRadius.circular(radius));
   }
 
   /// Renders [RoundedSuperellipseBorder] on Apple platforms or [RoundedRectangleBorder] as [OutlinedBorder].
@@ -63,25 +51,10 @@ final class TAdaptiveShapes {
     TBorderShape shape = TBorderShape.adaptive,
     Widget? child,
   }) {
-    final superellipse = ClipRSuperellipse(
-      borderRadius: BorderRadius.circular(radius.clamp(0.0, double.infinity)),
-      clipBehavior: clipBehavior,
-      child: child,
-    );
-
-    final roundedRect = ClipRRect(
-      borderRadius: BorderRadius.circular(radius.clamp(0.0, double.infinity)),
-      clipBehavior: clipBehavior,
-      child: child,
-    );
-
-    switch (shape) {
-      case .adaptive:
-        return TPlatform.isApple ? superellipse : roundedRect;
-      case .superellipse:
-        return superellipse;
-      case .roundedRect:
-        return roundedRect;
+    radius = radius.clamp(0.0, double.infinity);
+    if ((shape == .adaptive && TPlatform.isApple) || shape == .superellipse) {
+      return ClipRSuperellipse(borderRadius: BorderRadius.circular(radius), clipBehavior: clipBehavior, child: child);
     }
+    return ClipRRect(borderRadius: BorderRadius.circular(radius), clipBehavior: clipBehavior, child: child);
   }
 }
