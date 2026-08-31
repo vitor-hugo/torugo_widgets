@@ -6,12 +6,12 @@ library;
 //
 // COMMON
 //
-export 'common/t_adaptive_shapes.dart';
 export 'common/t_shadow_painter.dart';
 
 //
 // UTILS
 //
+export 'utils/t_adaptive_shapes.dart';
 export 'utils/t_platform.dart';
 
 //
