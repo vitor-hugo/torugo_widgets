@@ -3,7 +3,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:twidgets/utils/t_adaptive_shapes.dart';
+import 'package:torugo_widgets/utils/t_adaptive_shapes.dart';
 
 class TShadowPainter extends CustomPainter with Diagnosticable {
   const new({

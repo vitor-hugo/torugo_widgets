@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:twidgets/twidgets.dart';
+import 'package:torugo_widgets/torugo_widgets.dart';
 
 void main() {
   group('TPlatform', () {

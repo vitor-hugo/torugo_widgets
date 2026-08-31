@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:twidgets/twidgets.dart';
+import 'package:torugo_widgets/torugo_widgets.dart';
 
 void main() {
   group('TAdaptiveShapes', () {

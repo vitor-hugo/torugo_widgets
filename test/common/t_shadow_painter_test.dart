@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:twidgets/common/t_shadow_painter.dart';
-import 'package:twidgets/utils/t_adaptive_shapes.dart';
+import 'package:torugo_widgets/common/t_shadow_painter.dart';
+import 'package:torugo_widgets/utils/t_adaptive_shapes.dart';
 
 void main() {
   group('TShadowPainter', () {

@@ -3,7 +3,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:twidgets/twidgets.dart';
+import 'package:torugo_widgets/torugo_widgets.dart';
 
 class TContainer extends StatelessWidget {
   const TContainer({
