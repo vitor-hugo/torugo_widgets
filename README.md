@@ -1,14 +1,15 @@
-# TWidgets
+# TWidgets <!-- omit in toc -->
+
+A Flutter UI toolkit featuring a custom shadow painter that prevents shadows from
+bleeding through semi-transparent widget surfaces.
 
 > [!IMPORTANT]
 > This package is currently in early development and is not recommended for production environments.
 
-A Flutter library with useful widgets and utilities.
-
 My initial goal in creating this library was to address a standard Flutter rendering behavior
 where box shadows are drawn directly behind translucent widgets.
 
-Using a custom CustomPainter, TWidgets renders shadows similar to HTML/CSS box-shadow specifications,
+Using a custom painter, TWidgets renders shadows similar to HTML/CSS box-shadow specifications,
 preventing shadows from bleeding through semi-transparent widget bodies.
 
 <img src="doc/showcase.png" alt="TContainer showcase" width="500"/>
