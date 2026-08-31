@@ -1,6 +1,6 @@
 name: twidgets
 description: "A Flutter UI toolkit featuring a custom shadow painter that prevents shadows from bleeding through semi-transparent widget surfaces."
-version: 0.0.1
+version: 0.1.0
 homepage: https://github.com/vitor-hugo/twidgets
 topics: ["container", "shadow", "transparency", "widgets", "ui"]
 platforms:
