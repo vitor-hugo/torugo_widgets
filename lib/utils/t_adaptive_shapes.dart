@@ -6,6 +6,8 @@ import 'package:twidgets/twidgets.dart';
 
 enum TBorderShape { adaptive, roundedRect, superellipse }
 
+/// Collection of methods that provides common Flutter shapes adapted to the target platform,
+/// using superellipse shapes on Apple platforms and rounded rectangles elsewhere.
 final class TAdaptiveShapes {
   /// Renders [RoundedSuperellipseBorder] on Apple platforms and [RoundedRectangleBorder] otherwise.
   ///
