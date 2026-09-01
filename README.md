@@ -1,5 +1,8 @@
 # Torugo Widgets <!-- omit in toc -->
 
+> [!IMPORTANT]
+> This package is currently in early development and is not recommended for production environments.
+
 A Flutter UI toolkit featuring a custom shadow painter that prevents shadows from
 bleeding through semi-transparent widget surfaces.
 
