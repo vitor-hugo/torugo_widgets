@@ -14,9 +14,6 @@ environment:
   sdk: ^3.13.1
   flutter: ">=3.0.0"
 
-workspace:
-  - example
-
 dependencies:
   flutter:
     sdk: flutter
