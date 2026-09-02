@@ -174,16 +174,16 @@ class _TAnimatedContainerState extends AnimatedWidgetBaseState<TAnimatedContaine
   Widget build(BuildContext context) {
     final Animation<double> animation = this.animation;
 
-    final double? effectiveWidth = _width?.evaluate(animation)?.clamp(0.0, double.infinity);
-    final double? effectiveHeight = _height?.evaluate(animation)?.clamp(0.0, double.infinity);
+    final double? effectiveWidth = _width?.evaluate(animation)?.clamp(0.0, .infinity);
+    final double? effectiveHeight = _height?.evaluate(animation)?.clamp(0.0, .infinity);
 
     return TContainer(
-      width: null,
-      height: null,
-      minWidth: effectiveWidth ?? widget.minWidth,
-      maxWidth: effectiveWidth ?? widget.maxWidth,
-      minHeight: effectiveHeight ?? widget.minHeight,
-      maxHeight: effectiveHeight ?? widget.maxHeight,
+      width: effectiveWidth,
+      height: effectiveHeight,
+      minWidth: widget.minWidth,
+      maxWidth: widget.maxWidth,
+      minHeight: widget.minHeight,
+      maxHeight: widget.maxHeight,
       clipBehavior: widget.clipBehavior,
       borderShape: widget.borderShape,
       borderRadius: _borderRadius?.evaluate(animation) ?? 0.0,
