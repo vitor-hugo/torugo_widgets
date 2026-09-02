@@ -24,6 +24,7 @@ preventing shadows from bleeding through semi-transparent widget bodies.
 
 - [Widgets](#widgets)
   - [TContainer](#tcontainer)
+  - [TAnimatedContainer](#tanimatedcontainer)
 - [Utils](#utils)
   - [TAdaptiveShapes](#tadaptiveshapes)
   - [TPlatform](#tplatform)
@@ -77,6 +78,30 @@ TContainer(
 | blendMode       | `BlendMode?`         | `null`                  |
 | shadows         | `List<BoxShadow>`    | `[]`                    |
 | child           | `Widget?`            | `null`                  |
+
+## TAnimatedContainer
+
+Same as [`TContainer`](#tcontainer), but with animated transitions.
+
+Animation controller properties:
+| Property | Type               | Defaults to                   |
+| -------- | ------------------ | ----------------------------- |
+| duration | `Duration`         | **This property is required** |
+| curve    | `Curve`            | `Curves.linear`               |
+| onEnd    | `void Function()?` | `null`                        |
+
+Properties that can be animated:
+- width
+- height
+- borderRadius
+- borderSide
+- backgroundBlur
+- color
+- gradient
+- margin
+- padding
+- alignment
+- shadows
 
 # Utils
 
