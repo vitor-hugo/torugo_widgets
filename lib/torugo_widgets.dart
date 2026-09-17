@@ -20,3 +20,4 @@ export 'utils/t_platform.dart';
 
 // CONTAINERS
 export 'widgets/containers/t_container.dart';
+export 'widgets/containers/t_animated_container.dart';
