@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:torugo_widgets/torugo_widgets.dart';
-import 'package:torugo_widgets/widgets/containers/t_animated_container.dart';
 
 void main() {
   group('TAnimatedContainer', () {
