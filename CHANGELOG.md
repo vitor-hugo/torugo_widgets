@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Added **TColorExtension** on `Color` for HSL color handling.
+
 ## 0.2.2
 
 - Fixed **TAnimatedContainer** width and height properties values.
