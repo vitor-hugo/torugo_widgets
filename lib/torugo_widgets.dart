@@ -9,6 +9,11 @@ library;
 export 'common/t_shadow_painter.dart';
 
 //
+// EXTENSIONS
+//
+export 'extensions/t_color_extension.dart';
+
+//
 // UTILS
 //
 export 'utils/t_adaptive_shapes.dart';
