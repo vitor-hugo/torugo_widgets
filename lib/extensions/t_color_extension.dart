@@ -16,6 +16,25 @@ extension TColorExtension on Color {
   /// Current lightness
   double get lightness => toHSL.lightness;
 
+  /// Create an sRGB color from hue, saturation, lightness and alpha.
+  ///
+  /// * `h` is hue, from 0.0 to 360.0.
+  /// * `s` is saturation, from 0.0 to 1.0.
+  /// * `l` is lightness, from 0.0 to 1.0.
+  /// * `a` is alpha, from 0.0 to 1.0.
+  Color fromHSLA(double h, double s, double l, double a) {
+    return HSLColor.fromAHSL(a, h, s, l).toColor();
+  }
+
+  /// Create an sRGB color from hue, saturation and lightness.
+  ///
+  /// * `h` is hue, from 0.0 to 360.0.
+  /// * `s` is saturation, from 0.0 to 1.0.
+  /// * `l` is lightness, from 0.0 to 1.0.
+  Color fromHSL(double h, double s, double l) {
+    return HSLColor.fromAHSL(1.0, hue, saturation, lightness).toColor();
+  }
+
   /// Sets the [hue] of the color.
   /// The value must be in the range [0.0, 360.0].
   Color setHue(double hue) {
