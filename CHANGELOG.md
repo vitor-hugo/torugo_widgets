@@ -1,3 +1,7 @@
+## 0.4.0
+
+- Added **TColor** utility class.
+
 ## 0.3.0
 
 - Added **TColorExtension** on `Color` for HSL color handling.
