@@ -17,6 +17,7 @@ export 'extensions/t_color_extension.dart';
 // UTILS
 //
 export 'utils/t_adaptive_shapes.dart';
+export 'utils/t_color.dart';
 export 'utils/t_platform.dart';
 
 //
